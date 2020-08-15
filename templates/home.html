@@ -1,0 +1,30 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block nagaraju %}
+    <br>
+    <br>
+    <br>
+    <table align="center">
+         <tr style="color: white;background-color: dodgerblue" align="center">
+             <th width="1500">Movies</th>
+         </tr>
+         <tr>
+             <th>
+                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                 <div class="carousel-inner">
+                 <div class="carousel-item active" align="center">
+                  <img src="{% static 'images/killar.png' %}" class="d-block w-60"
+                      alt="..." height="400" width="1300">
+                 </div>
+                     {% for x in data %}
+                 <div class="carousel-item" align="center">
+                    <img src="{{ x.image }}" class="d-block w-60"
+                         alt="..." height="300" width="1300">
+                 </div>
+                     {% endfor %}
+                 </div>
+                 </div>
+             </th>
+         </tr>
+    </table>
+{% endblock %}

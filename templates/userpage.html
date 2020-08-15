@@ -1,0 +1,81 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block nagaraju %}
+   <br>
+    <br>
+    <br>
+    <button type="button" class="btn btn-light" style="color: blue">Welcome Mr/Miss  {{ user.usrname|capfirst }}</button>
+    <a href="{% url 'main' %}">
+     <button type="button" class="btn btn-primary">Logout</button>
+    </a>
+    <table align="center">
+         <tr style="color: white;background-color: dodgerblue"align="center">
+             <th width="1500">Movies</th>
+         </tr>
+         <tr>
+             <th>
+                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                 <div class="carousel-inner">
+                 <div class="carousel-item active"align="center">
+                  <img src="{% static 'images/killar.png' %}" class="d-block w-60"
+                      alt="..." height="300" width="1300">
+                 </div>
+                     {% for x in data %}
+                 <div class="carousel-item" align="center">
+                    <img src="{{ x.image }}" class="d-block w-60"
+                         alt="..." height="300" width="1300">
+                 </div>
+                     {% endfor %}
+                 </div>
+                 </div>
+             </th>
+         </tr>
+        <tr>
+            <th height="20"></th>
+        </tr>
+        <tr>
+            <th>
+                <table align="center" border="0" >
+                   <tr style="background-color: dodgerblue;color: white" align="center">
+                       <th colspan="5" width="1500">Movies</th>
+                   </tr>
+                   <tr >
+                     {% for x in data %}
+
+                       <th>
+
+                        <div class="card border-warning mb-3" style="max-width: 18rem;">
+                            <div class="card-image"><img src="{{ x.image }}" height="100" width="285"></div>
+
+                        <div class="card-header">{{ x.moviename }}</div>
+                        <div class="card-body text-dark">
+                        <h5 class="card-title">Release On:-{{ x.release }}</h5>
+                        <p class="card-text">Starring:-{{ x.casting }}</p>
+                        </div>
+                        </div>
+                       </th>
+                       <th width="5"></th>
+                     {% endfor %}
+                 </tr>
+                    <tr>
+    <th colspan="5" >
+    <nav aria-label="Page navigation example" style="margin-left:500px" >
+  <ul class="pagination"  >
+  {% if data.has_previous %}
+    <li class="page-item" ><a class="page-link" href="{% url 'userloginhome' %}?next={{ data.previous_page_number }}&usrname={{ user.usrname }}&pas={{ user.pas }}">Previous</a></li>
+      {% endif %}
+      {% for x in data.paginator.page_range %}
+    <li class="page-item"><a  class="page-link" href="{% url 'userloginhome' %}?next={{ x }}&usrname={{ user.usrname }}&pas={{ user.pas }}">{{ x }}</a></li>
+       {% endfor %}
+    {% if data.has_next %}
+    <li class="page-item"><a class="page-link" href="{% url 'userloginhome' %}?next={{ data.next_page_number }}&usrname={{ user.usrname }}&pas={{ user.pas }}">Next</a></li>
+        {% endif %}
+  </ul>
+</nav>
+    </th>
+</tr>
+</table>
+ </th>
+</tr>
+</table>
+{% endblock %}
